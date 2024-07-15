@@ -5,7 +5,6 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 300px;
-  position: relative;
   background: ${({ theme }) => theme['base-profile']};
 `
 
@@ -16,5 +15,6 @@ export const HeaderBackground = styled.div`
 `
 
 export const Logo = styled.img`
-  position: absolute;
+  margin-top: 10px;
+  align-self: baseline;
 `
