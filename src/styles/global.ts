@@ -22,13 +22,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    color: ${props => props.theme['gray-100']};
-    background-color: ${props => props.theme['gray-800']};
+    color: ${props => props.theme['base-title']};
+    background-color: ${props => props.theme['base-background']};
     -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
-    font: 400 1rem 'Roboto', sans-serif;
+    font: 400 1rem 'Nunito', sans-serif;
   } 
 
   button {
