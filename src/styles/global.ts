@@ -34,4 +34,8 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `

@@ -35,7 +35,7 @@ export function BlogProvider({ children }: BlogContextProps) {
 
     setPosts({
       total: data.total_count,
-      items: data.items
+      items: data.items.slice(0, 10)
     })
   }
 
