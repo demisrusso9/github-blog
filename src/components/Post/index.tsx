@@ -8,8 +8,22 @@ import {
   PostTitle
 } from './styles'
 import { formatDate } from '@/utils/formatDate'
+import { useNavigate } from 'react-router-dom'
+
+export interface GitHubPostIssue {
+  title: string
+  repository_url: string
+  created_at: string
+  comments: number
+  body: string
+  html_url: string
+  user: {
+    login: string
+  }
+}
 
 export function Post() {
+  const navigate = useNavigate()
   const { posts } = useGitHubBlog()
 
   function limitCharacters(text: string, limit: number) {
@@ -18,11 +32,20 @@ export function Post() {
     }
   }
 
+  function handleNavigateToPost(post: GitHubPostIssue) {
+    console.log(post);
+    
+    navigate('/post', { state: post })
+  }
+
   return (
     <PostContainer>
       {posts.items &&
         posts.items.map(post => (
-          <PostContent key={post.url}>
+          <PostContent
+            key={post.html_url}
+            onClick={() => handleNavigateToPost(post)}
+          >
             <PostHeader>
               <PostTitle>{post.title}</PostTitle>
               <PostDate>{formatDate(post.created_at)}</PostDate>

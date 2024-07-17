@@ -1,12 +1,12 @@
 import styled from 'styled-components'
+import Markdown from 'react-markdown'
 
-export const ProfileContainer = styled.div`
+export const PostContainer = styled.div`
   position: relative;
 
   background: ${({ theme }) => theme['base-profile']};
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
   box-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
 
@@ -14,19 +14,15 @@ export const ProfileContainer = styled.div`
   border-radius: 10px;
 
   margin-top: -95px;
-  margin-bottom: 4.5rem;
-  gap: 2rem;
+  margin-bottom: 2.5rem;
 `
 
-export const ProfileHeader = styled.div`
+export const PostHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`
-
-export const ProfileContent = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1.25rem;
 `
 
 export const Title = styled.h2`
@@ -37,24 +33,7 @@ export const Title = styled.h2`
 
 export const Link = styled.a`
   text-decoration: none;
-  font-weight: bold;
-  color: ${({ theme }) => theme['blue']};
-  font-size: 0.75rem;
-
-  display: flex;
-  align-items: center;
-
-  svg {
-    font-size: 0;
-    margin-left: 0.5rem;
-    height: 12px;
-    width: 12px;
-    color: ${({ theme }) => theme['blue']};
-  }
-`
-
-export const GoBack = styled.a`
-  text-decoration: none;
+  text-transform: uppercase;
   font-weight: bold;
   color: ${({ theme }) => theme['blue']};
   font-size: 0.75rem;
@@ -65,20 +44,21 @@ export const GoBack = styled.a`
 
   svg {
     font-size: 0;
-    margin-right: 0.5rem;
     height: 12px;
     width: 12px;
     color: ${({ theme }) => theme['blue']};
+
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      margin-left: 0.5rem;
+    }
   }
 `
 
-export const Description = styled.p`
-  color: ${({ theme }) => theme['base-text']};
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-`
-
-export const Status = styled.div`
+export const IssueInfo = styled.div`
   display: flex;
   gap: 1.5rem;
 
@@ -100,9 +80,51 @@ export const Status = styled.div`
     margin-left: 0.5rem;
   }
 `
+export const PostContent = styled(Markdown)`
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong {
+    color: ${({ theme }) => theme['base-title']};
+  }
 
-export const UserImage = styled.img`
-  height: 9.25rem;
-  width: 9.25rem;
-  border-radius: 8px;
+  a {
+    color: ${({ theme }) => theme['blue']};
+  }
+
+  h2 {
+    margin: 1rem 0;
+  }
+
+  h3 {
+    margin: 0.5rem 0;
+  }
+
+  p {
+    color: ${({ theme }) => theme['base-text']};
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+
+    strong {
+      margin: 0.5rem 0;
+    }
+  }
+
+  ul {
+    margin: 1rem 0;
+    margin-left: 1.5rem;
+
+    li {
+      color: ${({ theme }) => theme['base-text']};
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+  }
 `

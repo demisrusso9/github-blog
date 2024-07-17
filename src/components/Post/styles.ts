@@ -12,6 +12,8 @@ export const PostContent = styled.div`
   background: ${({ theme }) => theme['base-post']};
   border-radius: 10px;
   padding: 2rem;
+
+  cursor: pointer;
 `
 
 export const PostHeader = styled.div`
