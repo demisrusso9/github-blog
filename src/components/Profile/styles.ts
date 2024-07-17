@@ -10,13 +10,11 @@ export const ProfileContainer = styled.div`
   justify-content: center;
   box-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
 
-  max-width: 864px;
-  margin: 0 auto;
-
   padding: 32px 40px;
   border-radius: 10px;
 
   margin-top: -95px;
+  margin-bottom: 4.5rem;
   gap: 2rem;
 `
 
