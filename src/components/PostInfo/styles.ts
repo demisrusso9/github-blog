@@ -80,6 +80,7 @@ export const IssueInfo = styled.div`
     margin-left: 0.5rem;
   }
 `
+
 export const PostContent = styled(Markdown)`
   h1,
   h2,

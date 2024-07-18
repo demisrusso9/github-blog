@@ -11,7 +11,7 @@ import {
   ProfileHeader,
   Description,
   Link,
-  Status,
+  ProfileInfo,
   Title,
   UserImage
 } from './styles'
@@ -37,7 +37,7 @@ export function Profile() {
         <ProfileContent>
           <Description>{profile?.bio}</Description>
 
-          <Status>
+          <ProfileInfo>
             <p>
               <FontAwesomeIcon icon={faGithub} />
               <span>{profile?.login}</span>
@@ -52,7 +52,7 @@ export function Profile() {
               <FontAwesomeIcon icon={faUserGroup} />
               <span>{profile?.followers} seguidores</span>
             </p>
-          </Status>
+          </ProfileInfo>
         </ProfileContent>
       </section>
     </ProfileContainer>

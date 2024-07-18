@@ -53,32 +53,13 @@ export const Link = styled.a`
   }
 `
 
-export const GoBack = styled.a`
-  text-decoration: none;
-  font-weight: bold;
-  color: ${({ theme }) => theme['blue']};
-  font-size: 0.75rem;
-
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  svg {
-    font-size: 0;
-    margin-right: 0.5rem;
-    height: 12px;
-    width: 12px;
-    color: ${({ theme }) => theme['blue']};
-  }
-`
-
 export const Description = styled.p`
   color: ${({ theme }) => theme['base-text']};
   font-size: 1rem;
   margin-bottom: 1.5rem;
 `
 
-export const Status = styled.div`
+export const ProfileInfo = styled.div`
   display: flex;
   gap: 1.5rem;
 
