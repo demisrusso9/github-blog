@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
@@ -6,6 +7,8 @@ import {
   faCalendarDay,
   faComment
 } from '@fortawesome/free-solid-svg-icons'
+import { formatDate } from '@/utils/formatDate'
+import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
 import {
   PostContainer,
   PostHeader,
@@ -14,19 +17,18 @@ import {
   IssueInfo,
   Title
 } from './styles'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { GitHubPostIssue } from '../Post'
-import { formatDate } from '@/utils/formatDate'
+
+type BlogIssueItem = BlogIssueDTO['items'][0]
 
 export function PostInfo() {
   const location = useLocation()
   const navigate = useNavigate()
+  
+  const post = location.state as BlogIssueItem
 
   function handleGoBack() {
     navigate('/')
   }
-
-  const post = location.state as GitHubPostIssue
 
   return (
     <div>

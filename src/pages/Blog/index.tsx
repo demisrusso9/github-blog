@@ -1,24 +1,19 @@
-import { Header } from '@/components/Header'
 import { Profile } from '@/components/Profile'
 import { SearchForm } from '@/components/SearchForm'
 import { BlogContainer } from './styles'
-import { Post } from '@/components/Post'
+import { Cards } from '@/components/Cards'
 import { BlogProvider } from '@/contexts/BlogContext'
 
 export function Blog() {
   return (
-    <div>
-      <Header />
+    <BlogProvider>
+      <BlogContainer>
+        <Profile />
 
-      <BlogProvider>
-        <BlogContainer>
-          <Profile />
+        <SearchForm />
 
-          <SearchForm />
-
-          <Post />
-        </BlogContainer>
-      </BlogProvider>
-    </div>
+        <Cards />
+      </BlogContainer>
+    </BlogProvider>
   )
 }

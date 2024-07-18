@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
 
 export interface BlogContextData {
-  posts: GitHubIssues
-  profile: ProfileProps | undefined
+  posts: BlogIssueDTO
+  profile: ProfileProps
   fetchGitHubProfile: (username: string) => Promise<void>
   fetchGithubIssues: (search: string) => Promise<void>
 }
@@ -21,26 +22,11 @@ interface ProfileProps {
   followers: number
 }
 
-interface GitHubIssues {
-  total: number
-  items: {
-    title: string
-    repository_url: string
-    created_at: string
-    comments: number
-    body: string
-    html_url: string
-    user: {
-      login: string
-    }
-  }[]
-}
-
 export const BlogContext = createContext({} as BlogContextData)
 
 export function BlogProvider({ children }: BlogContextProps) {
-  const [profile, setProfile] = useState<ProfileProps>()
-  const [posts, setPosts] = useState<GitHubIssues>({} as GitHubIssues)
+  const [profile, setProfile] = useState<ProfileProps>({} as ProfileProps)
+  const [posts, setPosts] = useState<BlogIssueDTO>({} as BlogIssueDTO)
 
   const endpoint = 'https://api.github.com/search/issues?'
   const repository = 'rocketseat-education/reactjs-github-blog-challenge'

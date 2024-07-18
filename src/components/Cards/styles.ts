@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const PostContainer = styled.div`
+export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
@@ -8,7 +8,7 @@ export const PostContainer = styled.div`
   margin: 3rem 0;
 `
 
-export const PostContent = styled.div`
+export const CardContent = styled.div`
   background: ${({ theme }) => theme['base-post']};
   border-radius: 10px;
   padding: 2rem;
@@ -16,7 +16,7 @@ export const PostContent = styled.div`
   cursor: pointer;
 `
 
-export const PostHeader = styled.div`
+export const CardHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,19 +25,19 @@ export const PostHeader = styled.div`
   margin-bottom: 1.25rem;
 `
 
-export const PostTitle = styled.h2`
+export const CardTitle = styled.h2`
   font-size: 1.25rem;
   color: ${({ theme }) => theme['base-title']};
   flex: 1;
 `
 
-export const PostDate = styled.span`
+export const CardDate = styled.span`
   font-size: 0.875rem;
   color: ${({ theme }) => theme['base-span']};
   display: inline-block;
 `
 
-export const PostDescription = styled.p`
+export const CardDescription = styled.p`
   font-size: 1rem;
   color: ${({ theme }) => theme['base-text']};
 `
