@@ -1,12 +1,16 @@
 import axios from 'axios'
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useState } from 'react'
 import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
 
 export interface BlogContextData {
   posts: BlogIssueDTO
-  profile: ProfileProps
+  profile: ProfileProps | null
+  repositories: RepositoryProps[]
   fetchGitHubProfile: (username: string) => Promise<void>
+  fetchGithubRepository: (username: string) => Promise<void>
   fetchGithubIssues: (search: string) => Promise<void>
+  selectRepository: (name: string) => void
+  handleClearProfile: () => void
 }
 
 interface BlogContextProps {
@@ -22,14 +26,18 @@ interface ProfileProps {
   followers: number
 }
 
+interface RepositoryProps {
+  name: string
+  issues_url: string
+}
+
 export const BlogContext = createContext({} as BlogContextData)
 
 export function BlogProvider({ children }: BlogContextProps) {
-  const [profile, setProfile] = useState<ProfileProps>({} as ProfileProps)
-  const [posts, setPosts] = useState<BlogIssueDTO>({} as BlogIssueDTO)
-
-  const endpoint = 'https://api.github.com/search/issues?'
-  const repository = 'rocketseat-education/reactjs-github-blog-challenge'
+  const [profile, setProfile] = useState<ProfileProps | null>(null)
+  const [posts, setPosts] = useState({} as BlogIssueDTO)
+  const [repositories, setRepositories] = useState<RepositoryProps[]>([])
+  const [repository, setRepository] = useState('')
 
   async function fetchGitHubProfile(username: string) {
     try {
@@ -43,9 +51,30 @@ export function BlogProvider({ children }: BlogContextProps) {
     }
   }
 
-  async function fetchGithubIssues(search: string) {
+  async function fetchGithubRepository(username: string) {
+    try {
+      const { data } = await axios.get(
+        `https://api.github.com/users/${username}/repos`
+      )
+
+      const repos = data.map((repo: RepositoryProps) => {
+        return {
+          name: repo.name,
+          issues_url: repo.issues_url.replace('{/number}', '')
+        }
+      })
+
+      setRepositories(repos)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function fetchGithubIssues(search: string, repositoryName?: string) {
     const { data } = await axios.get(
-      `${endpoint}q=${search}&repo=${repository}`
+      `https://api.github.com/search/issues?q=${search}%20repo:${
+        profile?.login
+      }/${repositoryName ?? repository}`
     )
 
     setPosts({
@@ -54,18 +83,26 @@ export function BlogProvider({ children }: BlogContextProps) {
     })
   }
 
-  useEffect(() => {
-    fetchGitHubProfile('demisrusso9')
-    fetchGithubIssues('boas praticas')
-  }, [])
+  function handleClearProfile() {
+    setProfile(null)
+  }
+
+  async function selectRepository(repository: string) {
+    setRepository(repository)
+    await fetchGithubIssues('', repository)
+  }
 
   return (
     <BlogContext.Provider
       value={{
         posts,
         profile,
+        repositories,
         fetchGitHubProfile,
-        fetchGithubIssues
+        fetchGithubRepository,
+        fetchGithubIssues,
+        selectRepository,
+        handleClearProfile
       }}
     >
       {children}

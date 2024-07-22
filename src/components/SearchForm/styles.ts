@@ -21,10 +21,14 @@ export const SearchFormContainer = styled.div`
     }
   }
 
+  form {
+    display: flex;
+    gap: 1rem;
+  }
 `
 
 export const SearchFormInput = styled.input`
-  width: 100%;
+  flex: 1;
   font-size: 1rem;
   color: ${({ theme }) => theme['base-subtitle']};
   background: ${({ theme }) => theme['base-input']};
