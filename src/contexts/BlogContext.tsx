@@ -1,9 +1,10 @@
 import { createContext, ReactNode, useState } from 'react'
 import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
 import { api } from '@/services/api'
+import { toast, Bounce } from 'react-toastify'
 
 export interface BlogContextData {
-  posts: BlogIssueDTO
+  posts: BlogIssueDTO[]
   profile: ProfileProps | null
   repositories: RepositoryProps[]
   repository: string
@@ -36,7 +37,7 @@ export const BlogContext = createContext({} as BlogContextData)
 
 export function BlogProvider({ children }: BlogContextProps) {
   const [profile, setProfile] = useState<ProfileProps | null>(null)
-  const [posts, setPosts] = useState({} as BlogIssueDTO)
+  const [posts, setPosts] = useState<BlogIssueDTO[]>([])
   const [repositories, setRepositories] = useState<RepositoryProps[]>([])
   const [repository, setRepository] = useState('')
 
@@ -46,7 +47,17 @@ export function BlogProvider({ children }: BlogContextProps) {
 
       setProfile(data)
     } catch (error) {
-      console.log(error)
+      toast.error('Perfil não encontrado', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: 'dark',
+        transition: Bounce
+      })
     }
   }
 
@@ -70,19 +81,20 @@ export function BlogProvider({ children }: BlogContextProps) {
   async function fetchGithubIssues(search: string, repositoryName?: string) {
     const repo = repositoryName ?? repository
 
-    const { data } = await api.get(
-      `/search/issues?q=${search}%20repo:${profile?.login}/${repo}`
-    )
+    try {
+      const { data } = await api.get(
+        `/search/issues?q=${search}%20repo:${profile?.login}/${repo}`
+      )
 
-    setPosts({
-      total: data.total_count,
-      items: data.items.slice(0, 10)
-    })
+      setPosts(data.items.slice(0, 10))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   function handleClearProfile() {
     setProfile(null)
-    setPosts({} as BlogIssueDTO)
+    setPosts([])
     setRepositories([])
     setRepository('')
   }

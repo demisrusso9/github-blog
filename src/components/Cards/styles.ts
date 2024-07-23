@@ -5,7 +5,7 @@ export const CardContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
 
-  margin: 3rem 0;
+  margin: 3rem 0 5rem;
 
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
@@ -50,4 +50,14 @@ export const CardDate = styled.span`
 export const CardDescription = styled.p`
   font-size: 1rem;
   color: ${({ theme }) => theme['base-text']};
+`
+
+export const CardNoIssueFound = styled.div`
+  display: flex;
+  justify-content: center;
+
+  span {
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme['base-span']};
+  }
 `

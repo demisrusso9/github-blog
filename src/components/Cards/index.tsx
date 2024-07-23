@@ -8,14 +8,13 @@ import {
   CardDate,
   CardDescription,
   CardHeader,
+  CardNoIssueFound,
   CardTitle
 } from './styles'
 
-type BlogIssueItem = BlogIssueDTO['items'][0]
-
 export function Cards() {
   const navigate = useNavigate()
-  const { posts } = useGitHubBlog()
+  const { repository, posts } = useGitHubBlog()
 
   function limitCharacters(text: string, limit: number) {
     if (text?.length > limit) {
@@ -25,26 +24,36 @@ export function Cards() {
     return text
   }
 
-  function handleNavigateToPost(post: BlogIssueItem) {
+  function handleNavigateToPost(post: BlogIssueDTO) {
     navigate('/post', { state: post })
   }
 
   return (
-    <CardContainer>
-      {posts.items &&
-        posts.items.map(post => (
-          <CardContent
-            key={post.html_url}
-            onClick={() => handleNavigateToPost(post)}
-          >
-            <CardHeader>
-              <CardTitle>{post.title}</CardTitle>
-              <CardDate>{formatDate(post.created_at)}</CardDate>
-            </CardHeader>
+    <>
+      <CardContainer>
+        {posts &&
+          posts.map(post => (
+            <CardContent
+              key={post.html_url}
+              onClick={() => handleNavigateToPost(post)}
+            >
+              <CardHeader>
+                <CardTitle>{post.title}</CardTitle>
+                <CardDate>{formatDate(post.created_at)}</CardDate>
+              </CardHeader>
 
-            <CardDescription>{limitCharacters(post.body, 200)}</CardDescription>
-          </CardContent>
-        ))}
-    </CardContainer>
+              <CardDescription>
+                {limitCharacters(post.body, 200)}
+              </CardDescription>
+            </CardContent>
+          ))}
+      </CardContainer>
+
+      {repository && !posts.length && (
+        <CardNoIssueFound>
+          <span>Não encontramos nenhuma Issue!</span>
+        </CardNoIssueFound>
+      )}
+    </>
   )
 }

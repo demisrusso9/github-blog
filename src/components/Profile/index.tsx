@@ -35,14 +35,10 @@ export function Profile() {
   async function handleSearchProfile(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    try {
-      await fetchGitHubProfile(searchProfile)
-      await fetchGithubRepository(searchProfile)
-      
-      setSearchProfile('')
-    } catch (error) {
-      console.log(error)
-    }
+    await fetchGitHubProfile(searchProfile)
+    await fetchGithubRepository(searchProfile)
+
+    setSearchProfile('')
   }
 
   return (

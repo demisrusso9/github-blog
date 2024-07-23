@@ -17,7 +17,11 @@ export function SearchForm() {
       <div>
         <p>Publicações</p>
 
-        {posts.total > 0 && <span>{posts.total} publicações</span>}
+        {posts.length > 0 && (
+          <span>
+            {posts.length} {posts.length > 1 ? 'publicações' : 'publicação'}
+          </span>
+        )}
       </div>
 
       <form onSubmit={handleSubmit}>
