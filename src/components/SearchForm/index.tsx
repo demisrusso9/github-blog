@@ -1,5 +1,4 @@
 import { useState } from 'react'
-// import * as Select from '@radix-ui/react-select'
 import { useGitHubBlog } from '@/hooks/useGithubBlog'
 import { SearchFormContainer, SearchFormInput } from './styles'
 import { SelectRepository } from '../SelectRepository'
@@ -18,7 +17,7 @@ export function SearchForm() {
       <div>
         <p>Publicações</p>
 
-        <span>{posts.total} publicações</span>
+        {posts.total > 0 && <span>{posts.total} publicações</span>}
       </div>
 
       <form onSubmit={handleSubmit}>

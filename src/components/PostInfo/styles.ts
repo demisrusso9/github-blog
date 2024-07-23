@@ -79,6 +79,12 @@ export const IssueInfo = styled.div`
     color: ${({ theme }) => theme['base-subtitle']};
     margin-left: 0.5rem;
   }
+
+  @media (max-width: 720px) {
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
 `
 
 export const PostContent = styled(Markdown)`

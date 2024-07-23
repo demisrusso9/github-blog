@@ -24,6 +24,10 @@ export const SearchFormContainer = styled.div`
   form {
     display: flex;
     gap: 1rem;
+
+    @media (max-width: 720px) {
+      flex-direction: column;
+    }
   }
 `
 

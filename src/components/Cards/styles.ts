@@ -6,6 +6,10 @@ export const CardContainer = styled.div`
   gap: 2rem;
 
   margin: 3rem 0;
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const CardContent = styled.div`
@@ -23,6 +27,12 @@ export const CardHeader = styled.div`
 
   gap: 1.5rem;
   margin-bottom: 1.25rem;
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 `
 
 export const CardTitle = styled.h2`

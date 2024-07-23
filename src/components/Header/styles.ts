@@ -10,11 +10,22 @@ export const HeaderContainer = styled.div`
 
 export const HeaderBackground = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
+
+  img {
+    max-width: 100%;
+  }
+
+  @media (max-width: 720px) {
+    justify-content: center;
+  }
 `
 
 export const Logo = styled.img`
   margin-top: 10px;
   align-self: baseline;
+  font-size: 0;
+  max-width: 150px;
 `

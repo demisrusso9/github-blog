@@ -9,17 +9,21 @@ export const ProfileContainer = styled.div`
 
   background: ${({ theme }) => theme['base-profile']};
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
 
-  padding: 32px 40px;
+  padding: 2rem 2.5rem;
   border-radius: 10px;
 
   margin-top: -95px;
   margin-bottom: 4.5rem;
   gap: 2rem;
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
 `
 
 export const ProfileHeader = styled.div`
@@ -30,6 +34,18 @@ export const ProfileHeader = styled.div`
   div {
     display: flex;
     gap: 2rem;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 `
 
@@ -69,6 +85,11 @@ export const ProfileDescription = styled.p`
   color: ${({ theme }) => theme['base-text']};
   font-size: 1rem;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 720px) {
+    margin-top: 1rem;
+    text-align: center;
+  }
 `
 
 export const ProfileInfo = styled.div`
@@ -91,6 +112,17 @@ export const ProfileInfo = styled.div`
     font-size: 1rem;
     color: ${({ theme }) => theme['base-subtitle']};
     margin-left: 0.5rem;
+  }
+
+  @media (max-width: 720px) {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 `
 
