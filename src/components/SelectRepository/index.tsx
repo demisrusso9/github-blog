@@ -5,12 +5,13 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { Item, Trigger } from './styles'
 
 export function SelectRepository() {
-  const { repositories, selectRepository } = useGitHubBlog()
+  const { repositories, selectRepository, repository } = useGitHubBlog()
 
   return (
     <Select.Root
-      onValueChange={repository => selectRepository(repository)}
+      onValueChange={repo => selectRepository(repo)}
       disabled={repositories.length === 0}
+      value={repository}
     >
       <Trigger>
         <Select.Value placeholder='Escolha o repositório' />

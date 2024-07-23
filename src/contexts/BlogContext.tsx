@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { createContext, ReactNode, useState } from 'react'
 import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
+import { api } from '@/services/api'
 
 export interface BlogContextData {
   posts: BlogIssueDTO
@@ -42,9 +42,7 @@ export function BlogProvider({ children }: BlogContextProps) {
 
   async function fetchGitHubProfile(username: string) {
     try {
-      const { data } = await axios.get(
-        `https://api.github.com/users/${username}`
-      )
+      const { data } = await api.get(`/users/${username}`)
 
       setProfile(data)
     } catch (error) {
@@ -54,9 +52,7 @@ export function BlogProvider({ children }: BlogContextProps) {
 
   async function fetchGithubRepository(username: string) {
     try {
-      const { data } = await axios.get(
-        `https://api.github.com/users/${username}/repos`
-      )
+      const { data } = await api.get(`/users/${username}/repos`)
 
       const repos = data.map((repo: RepositoryProps) => {
         return {
@@ -72,10 +68,10 @@ export function BlogProvider({ children }: BlogContextProps) {
   }
 
   async function fetchGithubIssues(search: string, repositoryName?: string) {
-    const { data } = await axios.get(
-      `https://api.github.com/search/issues?q=${search}%20repo:${
-        profile?.login
-      }/${repositoryName ?? repository}`
+    const repo = repositoryName ?? repository
+
+    const { data } = await api.get(
+      `/search/issues?q=${search}%20repo:${profile?.login}/${repo}`
     )
 
     setPosts({
@@ -86,6 +82,9 @@ export function BlogProvider({ children }: BlogContextProps) {
 
   function handleClearProfile() {
     setProfile(null)
+    setPosts({} as BlogIssueDTO)
+    setRepositories([])
+    setRepository('')
   }
 
   async function selectRepository(repository: string) {

@@ -38,6 +38,7 @@ export function Profile() {
     try {
       await fetchGitHubProfile(searchProfile)
       await fetchGithubRepository(searchProfile)
+      
       setSearchProfile('')
     } catch (error) {
       console.log(error)

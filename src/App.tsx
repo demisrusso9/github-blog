@@ -4,6 +4,7 @@ import { GlobalStyle } from './styles/global'
 import { Routes } from '@/Routes'
 import { Header } from './components/Header'
 import { Wrapper } from './styles'
+import { BlogProvider } from '@/contexts/BlogContext'
 
 export function App() {
   return (
@@ -11,9 +12,11 @@ export function App() {
       <GlobalStyle />
 
       <Header />
-      
+
       <Wrapper>
-        <Routes />
+        <BlogProvider>
+          <Routes />
+        </BlogProvider>
       </Wrapper>
     </ThemeProvider>
   )

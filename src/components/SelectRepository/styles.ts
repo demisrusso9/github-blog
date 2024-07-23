@@ -16,7 +16,6 @@ export const Trigger = styled(Select.Trigger)`
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    border: 1px solid ${({ theme }) => theme['red']};
   }
 
   &:not(:disabled) {
