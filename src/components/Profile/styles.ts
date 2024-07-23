@@ -147,6 +147,7 @@ export const SearchFormInput = styled.input`
   padding: 12px 16px;
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme['base-border']};
+  margin-top: 1.25rem;
 
   &::placeholder {
     color: ${({ theme }) => theme['base-border']};
@@ -157,4 +158,9 @@ export const SearchProfile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+
+  form {
+    width: 100%;
+  }
 `
