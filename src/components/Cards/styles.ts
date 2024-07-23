@@ -16,23 +16,15 @@ export const CardContent = styled.div`
   background: ${({ theme }) => theme['base-post']};
   border-radius: 10px;
   padding: 2rem;
-
   cursor: pointer;
+  min-width: 100px;
 `
 
 export const CardHeader = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 1.25rem;
   margin-bottom: 1.25rem;
-
-  @media (max-width: 720px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
 `
 
 export const CardTitle = styled.h2`
