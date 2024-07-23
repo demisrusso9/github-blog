@@ -18,13 +18,11 @@ import {
   Title
 } from './styles'
 
-type BlogIssueItem = BlogIssueDTO['items'][0]
-
 export function PostInfo() {
   const location = useLocation()
   const navigate = useNavigate()
   
-  const post = location.state as BlogIssueItem
+  const post = location.state as BlogIssueDTO
 
   function handleGoBack() {
     navigate('/')
