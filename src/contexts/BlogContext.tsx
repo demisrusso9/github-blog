@@ -6,6 +6,7 @@ export interface BlogContextData {
   posts: BlogIssueDTO
   profile: ProfileProps | null
   repositories: RepositoryProps[]
+  repository: string
   fetchGitHubProfile: (username: string) => Promise<void>
   fetchGithubRepository: (username: string) => Promise<void>
   fetchGithubIssues: (search: string) => Promise<void>
@@ -98,6 +99,7 @@ export function BlogProvider({ children }: BlogContextProps) {
         posts,
         profile,
         repositories,
+        repository,
         fetchGitHubProfile,
         fetchGithubRepository,
         fetchGithubIssues,

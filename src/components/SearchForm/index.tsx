@@ -4,7 +4,7 @@ import { SearchFormContainer, SearchFormInput } from './styles'
 import { SelectRepository } from '../SelectRepository'
 
 export function SearchForm() {
-  const { posts, fetchGithubIssues } = useGitHubBlog()
+  const { posts, repository, fetchGithubIssues } = useGitHubBlog()
   const [inputValue, setInputValue] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
@@ -28,6 +28,7 @@ export function SearchForm() {
           placeholder='Buscar conteúdo'
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
+          disabled={!repository}
         />
       </form>
     </SearchFormContainer>

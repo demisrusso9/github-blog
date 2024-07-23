@@ -41,6 +41,11 @@ export const SearchFormInput = styled.input`
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme['base-border']};
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &::placeholder {
     color: ${({ theme }) => theme['base-border']};
   }
