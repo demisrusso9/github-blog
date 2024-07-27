@@ -8,10 +8,17 @@ export interface BlogContextData {
   profile: ProfileProps | null
   repositories: RepositoryProps[]
   repository: string
+  showLoadMoreIssues: boolean
+  page: number
   fetchGitHubProfile: (username: string) => Promise<void>
   fetchGithubRepository: (username: string) => Promise<void>
-  fetchGithubIssues: (search: string) => Promise<void>
+  fetchGithubIssues: (
+    search: string,
+    pageNumber: number,
+    repositoryName?: string
+  ) => Promise<void>
   selectRepository: (name: string) => void
+  incrementPage: () => void
   handleClearProfile: () => void
 }
 
@@ -40,6 +47,8 @@ export function BlogProvider({ children }: BlogContextProps) {
   const [posts, setPosts] = useState<BlogIssueDTO[]>([])
   const [repositories, setRepositories] = useState<RepositoryProps[]>([])
   const [repository, setRepository] = useState('')
+  const [showLoadMoreIssues, setShowLoadMoreIssues] = useState(false)
+  const [page, setPage] = useState(1)
 
   async function fetchGitHubProfile(username: string) {
     try {
@@ -78,18 +87,59 @@ export function BlogProvider({ children }: BlogContextProps) {
     }
   }
 
-  async function fetchGithubIssues(search: string, repositoryName?: string) {
+  async function fetchRepoIssues(pageNumber: number, repositoryName?: string) {
     const repo = repositoryName ?? repository
+    const endpoint = `/repos/${profile?.login}/${repo}/issues?page=${pageNumber}`
 
-    try {
-      const { data } = await api.get(
-        `/search/issues?q=${search}%20repo:${profile?.login}/${repo}`
-      )
+    const { data } = await api.get(endpoint)
 
-      setPosts(data.items.slice(0, 10))
-    } catch (error) {
-      console.log(error)
+    return data
+  }
+
+  async function searchRepoIssues(
+    search: string,
+    pageNumber: number,
+    repositoryName?: string
+  ) {
+    const repo = repositoryName ?? repository
+    const endpoint = `/search/issues?page=${pageNumber}&q=${search}%20repo:${profile?.login}/${repo}`
+
+    const { data } = await api.get(endpoint)
+
+    return data.items
+  }
+
+  async function fetchGithubIssues(
+    search: string = '',
+    pageNumber: number,
+    repositoryName?: string
+  ) {
+    let data
+
+    if (search) {
+      setPosts([])
+      data = await searchRepoIssues(search, pageNumber, repositoryName)
+    } else {
+      data = await fetchRepoIssues(pageNumber, repositoryName)
     }
+
+    setShowLoadMoreIssues(data.length >= 30)
+
+    if (data.length >= 30) {
+      setPosts(prevPosts => [...prevPosts, ...data])
+    } else {
+      setPosts([...data])
+    }
+  }
+
+  async function selectRepository(repository: string) {
+    setPage(1)
+    setPosts([])
+    setRepository(repository)
+  }
+
+  function incrementPage() {
+    setPage(page + 1)
   }
 
   function handleClearProfile() {
@@ -97,11 +147,7 @@ export function BlogProvider({ children }: BlogContextProps) {
     setPosts([])
     setRepositories([])
     setRepository('')
-  }
-
-  async function selectRepository(repository: string) {
-    setRepository(repository)
-    await fetchGithubIssues('', repository)
+    setPage(1)
   }
 
   return (
@@ -111,10 +157,13 @@ export function BlogProvider({ children }: BlogContextProps) {
         profile,
         repositories,
         repository,
+        showLoadMoreIssues,
+        page,
         fetchGitHubProfile,
         fetchGithubRepository,
         fetchGithubIssues,
         selectRepository,
+        incrementPage,
         handleClearProfile
       }}
     >

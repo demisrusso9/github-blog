@@ -5,11 +5,16 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { Item, Trigger } from './styles'
 
 export function SelectRepository() {
-  const { repositories, selectRepository, repository } = useGitHubBlog()
+  const { repositories, selectRepository, repository, fetchGithubIssues } = useGitHubBlog()
+
+  async function handleSelectRepository(repo: string){
+    selectRepository(repo)
+    await fetchGithubIssues('', 1, repo)
+  }
 
   return (
     <Select.Root
-      onValueChange={repo => selectRepository(repo)}
+      onValueChange={repo => handleSelectRepository(repo)}
       disabled={repositories.length === 0}
       value={repository}
     >

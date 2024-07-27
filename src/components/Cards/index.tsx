@@ -8,13 +8,21 @@ import {
   CardDate,
   CardDescription,
   CardHeader,
+  CardLoadMore,
   CardNoIssueFound,
   CardTitle
 } from './styles'
 
 export function Cards() {
+  const {
+    repository,
+    posts,
+    fetchGithubIssues,
+    incrementPage,
+    page,
+    showLoadMoreIssues
+  } = useGitHubBlog()
   const navigate = useNavigate()
-  const { repository, posts } = useGitHubBlog()
 
   function limitCharacters(text: string, limit: number) {
     if (text?.length > limit) {
@@ -28,10 +36,15 @@ export function Cards() {
     navigate('/post', { state: post })
   }
 
+  async function handleLoadMoreIssues() {
+    incrementPage()
+    await fetchGithubIssues('', page + 1)
+  }
+
   return (
     <>
       <CardContainer>
-        {posts &&
+        {posts.length > 0 &&
           posts.map(post => (
             <CardContent
               key={post.html_url}
@@ -48,6 +61,12 @@ export function Cards() {
             </CardContent>
           ))}
       </CardContainer>
+
+      {showLoadMoreIssues && posts.length > 0 && (
+        <CardLoadMore onClick={handleLoadMoreIssues}>
+          Carregar mais
+        </CardLoadMore>
+      )}
 
       {repository && !posts.length && (
         <CardNoIssueFound>

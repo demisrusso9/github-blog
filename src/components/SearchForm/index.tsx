@@ -9,7 +9,12 @@ export function SearchForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    await fetchGithubIssues(inputValue)
+
+    if (inputValue.length >= 3) {
+      await fetchGithubIssues(inputValue, 1)
+    }
+
+    return
   }
 
   return (

@@ -31,6 +31,7 @@ export const CardTitle = styled.h2`
   font-size: 1.25rem;
   color: ${({ theme }) => theme['base-title']};
   flex: 1;
+  overflow-wrap: anywhere;
 `
 
 export const CardDate = styled.span`
@@ -42,6 +43,7 @@ export const CardDate = styled.span`
 export const CardDescription = styled.p`
   font-size: 1rem;
   color: ${({ theme }) => theme['base-text']};
+  overflow-wrap: anywhere;
 `
 
 export const CardNoIssueFound = styled.div`
@@ -52,4 +54,12 @@ export const CardNoIssueFound = styled.div`
     font-size: 1.25rem;
     color: ${({ theme }) => theme['base-span']};
   }
+`
+
+export const CardLoadMore = styled.button`
+  font-size: 1.25rem;
+  color: ${({ theme }) => theme['blue']};
+  background: transparent;
+  border: 0;
+  width: 100%;
 `
