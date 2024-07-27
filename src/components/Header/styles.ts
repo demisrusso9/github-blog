@@ -13,9 +13,11 @@ export const HeaderBackground = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  overflow: hidden;
 
   img {
-    max-width: 100%;
+    height: auto;
+    max-width: 300px;
   }
 
   @media (max-width: 720px) {
