@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from 'react'
 import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
 import { api } from '@/services/api'
-import { toast, Bounce } from 'react-toastify'
+import { showToast } from '@/utils/toastify'
 
 export interface BlogContextData {
   posts: BlogIssueDTO[]
@@ -55,18 +55,8 @@ export function BlogProvider({ children }: BlogContextProps) {
       const { data } = await api.get(`/users/${username}`)
 
       setProfile(data)
-    } catch (error) {
-      toast.error('Perfil não encontrado', {
-        position: 'top-center',
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: 'dark',
-        transition: Bounce
-      })
+    } catch {
+      showToast('Perfil não encontrado')
     }
   }
 
@@ -82,8 +72,8 @@ export function BlogProvider({ children }: BlogContextProps) {
       })
 
       setRepositories(repos)
-    } catch (error) {
-      console.log(error)
+    } catch {
+      showToast('Erro ao buscar repositórios')
     }
   }
 
@@ -91,9 +81,13 @@ export function BlogProvider({ children }: BlogContextProps) {
     const repo = repositoryName ?? repository
     const endpoint = `/repos/${profile?.login}/${repo}/issues?page=${pageNumber}`
 
-    const { data } = await api.get(endpoint)
+    try {
+      const { data } = await api.get(endpoint)
 
-    return data
+      return data
+    } catch {
+      showToast('Erro ao buscar issues')
+    }
   }
 
   async function searchRepoIssues(
@@ -104,9 +98,13 @@ export function BlogProvider({ children }: BlogContextProps) {
     const repo = repositoryName ?? repository
     const endpoint = `/search/issues?page=${pageNumber}&q=${search}%20repo:${profile?.login}/${repo}`
 
-    const { data } = await api.get(endpoint)
+    try {
+      const { data } = await api.get(endpoint)
 
-    return data.items
+      return data.items
+    } catch {
+      showToast('Erro ao buscar issues')
+    }
   }
 
   async function fetchGithubIssues(
