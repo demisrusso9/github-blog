@@ -1,26 +1,27 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
+  faArrowUpRightFromSquare,
   faBuilding,
   faUserGroup,
-  faArrowUpRightFromSquare,
   faX
 } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useState } from 'react'
+
+import { useGitHubBlog } from '@/hooks/useGithubBlog'
+
 import {
+  Link,
   ProfileContainer,
   ProfileContent,
-  ProfileHeader,
-  ProfileTitle,
   ProfileDescription,
-  Link,
+  ProfileHeader,
   ProfileInfo,
-  Title,
-  UserImage,
+  ProfileTitle,
   SearchFormInput,
-  SearchProfile
-} from './styles'
-import { useGitHubBlog } from '@/hooks/useGithubBlog'
-import { useState } from 'react'
+  SearchProfile,
+  Title,
+  UserImage} from './styles'
 
 export function Profile() {
   const {

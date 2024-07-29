@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import { Blog } from '@/pages/Blog'
 import { Post } from '@/pages/Post'
 

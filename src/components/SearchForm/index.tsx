@@ -1,7 +1,9 @@
 import { useState } from 'react'
+
 import { useGitHubBlog } from '@/hooks/useGithubBlog'
-import { SearchFormContainer, SearchFormInput } from './styles'
+
 import { SelectRepository } from '../SelectRepository'
+import { SearchFormContainer, SearchFormInput } from './styles'
 
 export function SearchForm() {
   const { posts, repository, fetchGithubIssues } = useGitHubBlog()

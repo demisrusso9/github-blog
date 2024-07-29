@@ -1,12 +1,15 @@
+import 'react-toastify/dist/ReactToastify.css';
+
+import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from 'styled-components'
-import { defaultTheme } from './styles/themes/default'
-import { GlobalStyle } from './styles/global'
+
+import { BlogProvider } from '@/contexts/BlogContext'
 import { Routes } from '@/Routes'
+
 import { Header } from './components/Header'
 import { Wrapper } from './styles'
-import { BlogProvider } from '@/contexts/BlogContext'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { GlobalStyle } from './styles/global'
+import { defaultTheme } from './styles/themes/default'
 
 export function App() {
   return (

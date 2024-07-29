@@ -1,7 +1,9 @@
-import { useGitHubBlog } from '@/hooks/useGithubBlog'
-import * as Select from '@radix-ui/react-select'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Select from '@radix-ui/react-select'
+
+import { useGitHubBlog } from '@/hooks/useGithubBlog'
+
 import { Item, Trigger } from './styles'
 
 export function SelectRepository() {

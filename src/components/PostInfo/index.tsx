@@ -1,20 +1,22 @@
-import { useLocation, useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
   faArrowUpRightFromSquare,
-  faChevronLeft,
   faCalendarDay,
+  faChevronLeft,
   faComment
 } from '@fortawesome/free-solid-svg-icons'
-import { formatDate } from '@/utils/formatDate'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useLocation, useNavigate } from 'react-router-dom'
+
 import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
+import { formatDate } from '@/utils/formatDate'
+
 import {
-  PostContainer,
-  PostHeader,
-  PostContent,
-  Link,
   IssueInfo,
+  Link,
+  PostContainer,
+  PostContent,
+  PostHeader,
   Title
 } from './styles'
 

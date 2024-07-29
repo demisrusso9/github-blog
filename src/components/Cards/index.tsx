@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom'
+
+import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
 import { useGitHubBlog } from '@/hooks/useGithubBlog'
 import { formatDate } from '@/utils/formatDate'
-import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
+
 import {
   CardContainer,
   CardContent,
