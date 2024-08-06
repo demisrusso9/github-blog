@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
+import { useGitHubBlog } from '@/contexts/BlogContext'
 import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
-import { useGitHubBlog } from '@/hooks/useGithubBlog'
 import { formatDate } from '@/utils/formatDate'
 
 import {

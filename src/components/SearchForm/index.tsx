@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useGitHubBlog } from '@/hooks/useGithubBlog'
+import { useGitHubBlog } from '@/contexts/BlogContext'
 
 import { SelectRepository } from '../SelectRepository'
 import { SearchFormContainer, SearchFormInput } from './styles'

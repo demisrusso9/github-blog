@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 
 import { BlogIssueDTO } from '@/dtos/blogIssueDTO'
 import { api } from '@/services/api'
@@ -41,7 +41,7 @@ interface RepositoryProps {
   issues_url: string
 }
 
-export const BlogContext = createContext({} as BlogContextData)
+const BlogContext = createContext({} as BlogContextData)
 
 export function BlogProvider({ children }: BlogContextProps) {
   const [profile, setProfile] = useState<ProfileProps | null>(null)
@@ -169,4 +169,8 @@ export function BlogProvider({ children }: BlogContextProps) {
       {children}
     </BlogContext.Provider>
   )
+}
+
+export function useGitHubBlog() {
+  return useContext(BlogContext)
 }

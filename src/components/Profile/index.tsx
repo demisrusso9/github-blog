@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 
-import { useGitHubBlog } from '@/hooks/useGithubBlog'
+import { useGitHubBlog } from '@/contexts/BlogContext'
 
 import {
   Link,
